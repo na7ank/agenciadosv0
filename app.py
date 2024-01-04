@@ -10,6 +10,13 @@ st.set_page_config(page_title="graficando",
                    )
 st.title('Informações Básicas sobre Agências Bancárias')
 
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 data = pd.read_csv('./dataset/202311bccags.csv', sep=';', encoding='utf-8-sig')
 
