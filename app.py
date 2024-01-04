@@ -4,7 +4,10 @@ import plotly.express as px
 
 
 # Titulo
-st.set_page_config(layout="wide")
+st.set_page_config(page_title="graficando", 
+                   page_icon="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Map-circle-blue.svg/1024px-Map-circle-blue.svg.png",
+                   initial_sidebar_state="expanded", layout="wide"
+                   )
 st.title('Informações Básicas sobre Agências Bancárias')
 
 
