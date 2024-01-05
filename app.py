@@ -13,6 +13,7 @@ st.title('Informações Básicas sobre Agências Bancárias')
 hidden = """
             <style>
             #MainMenu {visibility: hidden !important;}
+            .reportview-container .main footer {visibility: hidden;}
             footer {visibility: hidden !important;}
             footer {display: none !important;}
             header {visibility: hidden !important;}
