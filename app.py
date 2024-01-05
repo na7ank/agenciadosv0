@@ -12,11 +12,9 @@ st.title('Informações Básicas sobre Agências Bancárias')
 
 hidden = """
             <style>
-            [data-testid="stToolbar"] {visibility: hidden !important;}
             #MainMenu {visibility: hidden !important;}
             footer {visibility: hidden !important;}
             header {visibility: hidden !important;}
-            a {display: none !important;}
             </style>
             """
 st.markdown(hidden, unsafe_allow_html=True)
