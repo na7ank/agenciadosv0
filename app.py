@@ -12,7 +12,6 @@ st.title('Informações Básicas sobre Agências Bancárias')
 
 try_hidden = """
             <style>
-            [data-testid="stToolbar"] {visibility: hidden !important;}
             #MainMenu {visibility: hidden !important;}
             footer {visibility: hidden !important;}
             header {visibility: hidden !important;}
@@ -26,13 +25,12 @@ data = pd.read_csv('./dataset/202311bccags.csv', sep=';', encoding='utf-8-sig')
 # Side Menu
 with st.sidebar:
     st.write('Selecione os filtros de preferência para particionar os dados.')
-
     col1, col2 = st.columns(2)
     with col1:
         check_box_ufs = st.checkbox('All UFs:', value=False)
     with col2:
         check_box_bancos = st.checkbox('All Bancos:', value=False)
-
+    
     uf = st.multiselect("UF", list(set(data['uf'])), ['SP'])
     instituicao = st.multiselect("Instituição", list(set(data['Instituição'])), ['BANCO BRADESCO S.A.'])
     codigo = st.slider('Agência Código', min(data['Código']), max(data['Código']), (0, 1000))
@@ -67,9 +65,10 @@ with bars:
 
 with table:
     st.write("🎲 Dados")
+    st.write(f"{data.shape[0]} Agências encontradas.")
     st.dataframe(data, hide_index=True)
 
 with locals:
-    st.write("Locais com maior número de Agências.")
     groups = data[['Bairro', 'uf', 'Município']].groupby(['Bairro', 'uf', 'Município']).value_counts().reset_index(name='Qnt Agências')
+    st.write("Quantidade de agências agrupadas por uf, município e bairro.") 
     st.dataframe(groups, hide_index=True)
