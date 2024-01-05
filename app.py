@@ -23,8 +23,6 @@ st.markdown(hidden, unsafe_allow_html=True)
 
 data = pd.read_csv('./dataset/202311bccags.csv', sep=';', encoding='utf-8-sig')
 
-#primary_clr = st.get_option("theme.primaryColor")
-
 # Side Menu
 with st.sidebar:
     st.write('Selecione os filtros de preferência para particionar os dados.')
@@ -53,7 +51,7 @@ data = data[cond_cod]
 # Center
 table, locals, bars = st.tabs(["🏦 Agências", "📈 Quantidades", "📊 Top 7"])
 with bars:
-    st.write("Bancos com maior quantidades de agências.")
+    st.write("Bancos com maior quantidade de agências.")
     data_full = pd.read_csv('./dataset/202311bccags.csv', sep=';', encoding='utf-8-sig', usecols=['Instituição', 'uf'])
     if not check_box_ufs:
         data_full = data_full[data_full['uf'].isin(uf)]
