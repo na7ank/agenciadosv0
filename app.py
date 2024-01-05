@@ -12,6 +12,7 @@ st.title('Informações Básicas sobre Agências Bancárias')
 
 try_hidden = """
             <style>
+            [data-testid="stToolbar"] {visibility: hidden !important;}
             #MainMenu {visibility: hidden !important;}
             footer {visibility: hidden !important;}
             header {visibility: hidden !important;}
