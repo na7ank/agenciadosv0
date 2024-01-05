@@ -10,7 +10,7 @@ st.set_page_config(page_title="graficando",
                    )
 st.title('Informações Básicas sobre Agências Bancárias')
 
-try_hidden = """
+hidden = """
             <style>
             [data-testid="stToolbar"] {visibility: hidden !important;}
             #MainMenu {visibility: hidden !important;}
@@ -19,7 +19,7 @@ try_hidden = """
             a {display: none !important;}
             </style>
             """
-
+st.markdown(hidden, unsafe_allow_html=True)
 
 data = pd.read_csv('./dataset/202311bccags.csv', sep=';', encoding='utf-8-sig')
 
@@ -28,6 +28,7 @@ data = pd.read_csv('./dataset/202311bccags.csv', sep=';', encoding='utf-8-sig')
 # Side Menu
 with st.sidebar:
     st.write('Selecione os filtros de preferência para particionar os dados.')
+
     col1, col2 = st.columns(2)
     with col1:
         check_box_ufs = st.checkbox('All UFs:', value=False)
