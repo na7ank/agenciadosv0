@@ -14,6 +14,7 @@ hidden = """
             <style>
             #MainMenu {visibility: hidden !important;}
             footer {visibility: hidden !important;}
+            footer {display: none !important;}
             header {visibility: hidden !important;}
             </style>
             """
