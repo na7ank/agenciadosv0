@@ -18,9 +18,11 @@ try_hidden = """
             a {display: none !important;}
             </style>
             """
-st.markdown(try_hidden, unsafe_allow_html=True)
+
 
 data = pd.read_csv('./dataset/202311bccags.csv', sep=';', encoding='utf-8-sig')
+
+#primary_clr = st.get_option("theme.primaryColor")
 
 # Side Menu
 with st.sidebar:
@@ -60,6 +62,7 @@ with bars:
     color = st.color_picker('', '#FF2600')
     color_scale = [(0.0, '#EFEFEF'), (1.0, color)]
     fig = px.bar(contagem_classes, x='Qnt', y='Instituição', orientation='h', labels={'x': 'Qnt', 'y': 'Instituição'}, color='Qnt', color_continuous_scale=color_scale, opacity=0.8)
+    
     fig.update_layout(yaxis=dict(autorange="reversed"))
     st.plotly_chart(fig, config={"displayModeBar": False})
 
