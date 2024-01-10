@@ -37,8 +37,8 @@ with st.sidebar:
     
     uf = st.multiselect("UF", list(set(data['uf'])), ['SP'])
     instituicao = st.multiselect("Instituição", list(set(data['Instituição'])), ['BANCO BRADESCO S.A.'])
-    check_box_codigos = st.checkbox('All Códigos:')
-    codigo = st.number_input('Código', min_value=0, step=1)
+    check_box_codigos = st.checkbox('All Códigos:', value=True)
+    codigo = st.number_input('Código específico:', min_value=0, step=1)
 
 
 # Filter chack box Data
