@@ -22,6 +22,8 @@ hidden = """
 st.markdown(hidden, unsafe_allow_html=True)
 
 data = pd.read_csv('./dataset/202311bccags.csv', sep=';', encoding='utf-8-sig')
+data['Código'] = data['Código'].astype(str) 
+
 
 # Side Menu
 with st.sidebar:
@@ -35,7 +37,9 @@ with st.sidebar:
     
     uf = st.multiselect("UF", list(set(data['uf'])), ['SP'])
     instituicao = st.multiselect("Instituição", list(set(data['Instituição'])), ['BANCO BRADESCO S.A.'])
-    codigo = st.slider('Agência Código', min(data['Código']), max(data['Código']), (0, 1000))
+    check_box_codigos = st.checkbox('All Códigos:')
+    codigo = st.number_input('Código', min_value=0, step=1)
+
 
 # Filter chack box Data
 if not check_box_ufs:
@@ -44,9 +48,8 @@ if not check_box_ufs:
 if not check_box_bancos:
     cond_instituicao = (data['Instituição'].isin(instituicao))
     data = data[cond_instituicao]
-
-cond_cod = (data['Código'] >= codigo[0]) & (data['Código'] <= codigo[1])
-data = data[cond_cod]
+if not check_box_codigos:
+    data = data[data['Código'] == str(codigo)]
 
 # Center
 table, locals, bars = st.tabs(["🏦 Agências", "📈 Quantidades", "📊 Top 7"])
@@ -75,3 +78,6 @@ with locals:
     groups = data[['Bairro', 'uf', 'Município']].groupby(['Bairro', 'uf', 'Município']).value_counts().reset_index(name='Qnt Agências')
     st.write("Quantidade de agências agrupadas por uf, município e bairro.") 
     st.dataframe(groups, hide_index=True)
+
+
+#python -m streamlit run app.py
