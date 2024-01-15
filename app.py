@@ -35,7 +35,9 @@ with st.sidebar:
         check_box_bancos = st.checkbox('All Bancos:', value=False)
     
     uf = st.multiselect("UF", list(set(data['uf'])))
-    bairro = st.multiselect("Bairro", list(set(data['Bairro'])), [])
+    municipio = st.multiselect("Municípios", list(set(data['Município'])), [])
+    bairro = st.multiselect("Bairros", list(set(data['Bairro'])), [])
+    
     instituicao = st.multiselect("Instituição", list(set(data['Instituição'])), ['BANCO BRADESCO S.A.'])
     check_box_codigos = st.checkbox('All Códigos:', value=True)
     codigo = st.number_input('Código específico:', min_value=0, step=1)
@@ -51,7 +53,8 @@ if not check_box_codigos:
     data = data[data['Código'] == str(codigo)]
 if bairro != []:
     data = data[data['Bairro'].isin(bairro)]
-
+if municipio != []:
+    data = data[data['Munícipio'].isin(municipio)]
 
 # Center
 table, locals, bars = st.tabs(["🏦 Agências", "📈 Quantidades", "📊 Top 7"])
