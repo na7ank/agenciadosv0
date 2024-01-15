@@ -77,12 +77,12 @@ with bars:
 with table:
     st.write("🎲 Dados")
     st.write(f"**{data.shape[0]}** Agências encontradas.")
-    st.dataframe(data, hide_index=True)
+    st.dataframe(data, hide_index=True, width = 1280)
 
 with locals:
     groups = data[['Bairro', 'uf', 'Município']].groupby(['Bairro', 'uf', 'Município']).value_counts().reset_index(name='Qnt Agências')
     st.write("Quantidade de agências agrupadas por uf, município e bairro.") 
-    st.dataframe(groups, hide_index=True)
+    st.dataframe(groups, hide_index=True, width = 1280)
 
 
 #python -m streamlit run app.py
