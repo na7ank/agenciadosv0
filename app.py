@@ -54,7 +54,7 @@ if not check_box_codigos:
 if bairro != []:
     data = data[data['Bairro'].isin(bairro)]
 if municipio != []:
-    data = data[data['Munícipio'].isin(municipio)]
+    data = data[data['Município'].isin(municipio)]
 
 # Center
 table, locals, bars = st.tabs(["🏦 Agências", "📈 Quantidades", "📊 Top 7"])
