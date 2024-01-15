@@ -2,7 +2,6 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 
-
 # Titulo
 st.set_page_config(page_title="graficando", 
                    page_icon="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Map-circle-blue.svg/1024px-Map-circle-blue.svg.png",
@@ -21,9 +20,9 @@ hidden = """
             """
 st.markdown(hidden, unsafe_allow_html=True)
 
+# Load data, formats
 data = pd.read_csv('./dataset/202312bccags.csv', sep=';', encoding='ISO-8859-1')
 data['Código'] = data['Código'].astype(str) 
-
 
 # Side Menu
 with st.sidebar:
@@ -35,13 +34,13 @@ with st.sidebar:
     with col2:
         check_box_bancos = st.checkbox('All Bancos:', value=False)
     
-    uf = st.multiselect("UF", list(set(data['uf'])), ['SP'])
+    uf = st.multiselect("UF", list(set(data['uf'])))
+    bairro = st.multiselect("Bairro", list(set(data['Bairro'])), [])
     instituicao = st.multiselect("Instituição", list(set(data['Instituição'])), ['BANCO BRADESCO S.A.'])
     check_box_codigos = st.checkbox('All Códigos:', value=True)
     codigo = st.number_input('Código específico:', min_value=0, step=1)
 
-
-# Filter chack box Data
+# Filter check box Data
 if not check_box_ufs:
     cond_uf = (data['uf'].isin(uf))
     data = data[cond_uf]
@@ -50,12 +49,15 @@ if not check_box_bancos:
     data = data[cond_instituicao]
 if not check_box_codigos:
     data = data[data['Código'] == str(codigo)]
+if bairro != []:
+    data = data[data['Bairro'].isin(bairro)]
+
 
 # Center
 table, locals, bars = st.tabs(["🏦 Agências", "📈 Quantidades", "📊 Top 7"])
 with bars:
-    st.write("Bancos com maior quantidade de agências.")
     data_full = pd.read_csv('./dataset/202312bccags.csv', sep=';', encoding='ISO-8859-1', usecols=['Instituição', 'uf'])
+    st.write(f"Bancos com maior quantidade de agências. Total **{data_full.shape[0]}** agências.")
     if not check_box_ufs:
         data_full = data_full[data_full['uf'].isin(uf)]
     # Counts
@@ -71,7 +73,7 @@ with bars:
 
 with table:
     st.write("🎲 Dados")
-    st.write(f"{data.shape[0]} Agências encontradas.")
+    st.write(f"**{data.shape[0]}** Agências encontradas.")
     st.dataframe(data, hide_index=True)
 
 with locals:
