@@ -21,7 +21,7 @@ hidden = """
             """
 st.markdown(hidden, unsafe_allow_html=True)
 
-data = pd.read_csv('./dataset/202311bccags.csv', sep=';', encoding='utf-8-sig')
+data = pd.read_csv('./dataset/202312bccags.csv', sep=';', encoding='ISO-8859-1')
 data['Código'] = data['Código'].astype(str) 
 
 
@@ -55,7 +55,7 @@ if not check_box_codigos:
 table, locals, bars = st.tabs(["🏦 Agências", "📈 Quantidades", "📊 Top 7"])
 with bars:
     st.write("Bancos com maior quantidade de agências.")
-    data_full = pd.read_csv('./dataset/202311bccags.csv', sep=';', encoding='utf-8-sig', usecols=['Instituição', 'uf'])
+    data_full = pd.read_csv('./dataset/202312bccags.csv', sep=';', encoding='ISO-8859-1', usecols=['Instituição', 'uf'])
     if not check_box_ufs:
         data_full = data_full[data_full['uf'].isin(uf)]
     # Counts
