@@ -12,6 +12,7 @@ st.title('Informações Básicas sobre Agências Bancárias')
 hidden = """
             <style>
             .reportview-container .main footer {visibility: hidden;}
+            #viewerBadge_link__qRIco {visibility: hidden !important;}
             #MainMenu {visibility: hidden !important;}
             footer {visibility: hidden !important;}
             footer {display: none !important;}
